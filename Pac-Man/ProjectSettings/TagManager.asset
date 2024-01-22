@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Pac_Gomme
+  - Super_Pac_Gomme
+  - "Fant\xF4me"
   layers:
   - Default
   - TransparentFX
