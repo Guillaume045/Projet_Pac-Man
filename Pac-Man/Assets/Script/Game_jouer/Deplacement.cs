@@ -58,5 +58,9 @@ public class Deplace : MonoBehaviour
             //Debug.Log("Fantôme mangé");
             Destroy(collision.gameObject);
         }
+        else if (collision.collider.CompareTag("Fantôme"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
