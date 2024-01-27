@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fantôme : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 2f;
     public List<Vector2> waypoints;
     private int currentWaypointIndex = 0;
 
