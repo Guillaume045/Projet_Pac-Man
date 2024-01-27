@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;   // event
-using UnityEngine.UI;       // score
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Deplace : MonoBehaviour
@@ -10,11 +9,10 @@ public class Deplace : MonoBehaviour
     public float seed = 10;
     public float score = 0;
     public Text Texte_Score;
-
-    public int vie = 3;    // Nombre de vies
     public Text Texte_Vie;
-    private Vector3 spawnPoint;
 
+    public int vie = 3;
+    private Vector3 spawnPoint;
     private bool canEatGhosts = false;
     private float superPacGommeStartTime = 0f;
     private float superPacGommeDuration = 5f;
@@ -22,7 +20,6 @@ public class Deplace : MonoBehaviour
     void Start()
     {
         spawnPoint = transform.position;
-
         if (Texte_Vie != null)
         {
             Texte_Vie.text = "Vie : " + vie.ToString();
@@ -35,7 +32,7 @@ public class Deplace : MonoBehaviour
     }
 
     void Update()
-    {   // mouvement joueur
+    {
         float movX = Input.GetAxis("Horizontal");
         float movY = Input.GetAxis("Vertical");
         transform.Translate(new Vector2(movX, movY) * seed * Time.deltaTime);
@@ -45,6 +42,11 @@ public class Deplace : MonoBehaviour
             canEatGhosts = false;
             Debug.Log("temps dépassé");
         }
+
+        if (score >= 740)
+        {
+            ResetScene();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -53,10 +55,7 @@ public class Deplace : MonoBehaviour
         {
             Destroy(other.gameObject);
             score += 10;
-            if (Texte_Score != null)
-            {
-                Texte_Score.text = "Score : " + score.ToString();
-            }
+            Texte_Score.text = "Score : " + score.ToString();
         }
         else if (other.CompareTag("Super_Pac_Gomme"))
         {
@@ -78,7 +77,7 @@ public class Deplace : MonoBehaviour
     {
         if (collision.collider.CompareTag("Fantôme") && canEatGhosts)
         {
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
         }
         else if (collision.collider.CompareTag("Fantôme"))
         {
@@ -89,10 +88,7 @@ public class Deplace : MonoBehaviour
     void LoseLife()
     {
         vie--;
-        if (Texte_Vie != null)
-        {
-            Texte_Vie.text = "Vie : " + vie.ToString();
-        }
+        Texte_Vie.text = "Vie : " + vie.ToString();
         if (vie <= 0)
         {
             SceneManager.LoadScene(0);
@@ -101,5 +97,13 @@ public class Deplace : MonoBehaviour
         {
             transform.position = spawnPoint;
         }
+    }
+
+    void ResetScene()
+    {
+        PlayerPrefs.SetInt("vie", vie);
+        PlayerPrefs.SetFloat("score", score);
+        PlayerPrefs.Save();
+        SceneManager.LoadScene(1);
     }
 }
