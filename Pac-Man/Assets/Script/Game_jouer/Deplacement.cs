@@ -71,15 +71,11 @@ public class Deplace : MonoBehaviour
         {
             canEatGhosts = false;
         }
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.CompareTag("Fantôme") && canEatGhosts)
+        else if (other.CompareTag("Fantôme") && canEatGhosts)
         {
             //Destroy(collision.gameObject);
         }
-        else if (collision.collider.CompareTag("Fantôme"))
+        else if (other.CompareTag("Fantôme"))
         {
             LoseLife();
         }

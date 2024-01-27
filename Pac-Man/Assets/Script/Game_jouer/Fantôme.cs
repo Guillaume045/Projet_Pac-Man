@@ -43,9 +43,9 @@ public class Fantôme : MonoBehaviour
         transform.Translate(direction * speed * Time.deltaTime);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerExit2D(Collider2D other)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             Respawn();
         }
