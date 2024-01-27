@@ -5,51 +5,28 @@ using UnityEngine;
 public class Fantôme : MonoBehaviour
 {
     public float speed = 5f;
-
-    private Vector2 direction;
-
-    void Start()
-    {
-        // Initialiser la direction vers le haut au début
-        direction = Vector2.up;
-    }
+    public List<Vector2> waypoints;
+    private int currentWaypointIndex = 0;
 
     void Update()
     {
-        Move();
+        if (waypoints != null && waypoints.Count > 0)
+        {
+            MoveToWaypoint();
+        }
     }
 
-    void Move()
+    void MoveToWaypoint()
     {
-        // Déplacer le Fantôme dans la direction actuelle
+        // Vérifier si le fantôme est arrivé au waypoint actuel
+        if (Vector2.Distance(transform.position, waypoints[currentWaypointIndex]) < 0.1f)
+        {
+            // Passer au prochain waypoint
+            currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Count;
+        }
+
+        // Déplacer le fantôme vers le waypoint actuel
+        Vector2 direction = (waypoints[currentWaypointIndex] - (Vector2)transform.position).normalized;
         transform.Translate(direction * speed * Time.deltaTime);
-
-        // Vérifier s'il y a une collision avec un mur
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 0.5f);
-        if (hit.collider != null)
-        {
-            // Changer la direction en fonction de la collision
-            AdjustDirection(hit.normal);
-        }
-    }
-
-    void AdjustDirection(Vector2 collisionNormal)
-    {
-        // Changer la direction en fonction de la collision
-        if (collisionNormal == Vector2.right || collisionNormal == -Vector2.right)
-        {
-            // Collision avec un mur sur le côté droit ou gauche
-            direction = Vector2.up; // Aller vers le haut
-        }
-        else if (collisionNormal == Vector2.up || collisionNormal == -Vector2.up)
-        {
-            // Collision avec un mur en haut ou en bas
-            direction = Vector2.right; // Aller vers la droite
-        }
-        else
-        {
-            // Collision avec un coin, reculer
-            direction = -direction;
-        }
     }
 }
