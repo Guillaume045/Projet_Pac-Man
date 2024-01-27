@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: "fant\xF4me"
+  m_Name: "fant\xF4me4"
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,11 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 21300000, guid: aa9a6f9d5b4badf4297f691e9ef0a6d2, type: 3}
+      value: {fileID: 21300000, guid: 73d8184511990c245838e93931a1359e, type: 3}
     - time: 0.13333334
-      value: {fileID: 21300000, guid: 226562b55fbddfd4cbefd1bb37d5d7ca, type: 3}
+      value: {fileID: 21300000, guid: 1e25cad83ba546b458e5cbaebb0d9485, type: 3}
     - time: 0.25
-      value: {fileID: 21300000, guid: aa9a6f9d5b4badf4297f691e9ef0a6d2, type: 3}
+      value: {fileID: 21300000, guid: 73d8184511990c245838e93931a1359e, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -48,9 +48,9 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 21300000, guid: aa9a6f9d5b4badf4297f691e9ef0a6d2, type: 3}
-    - {fileID: 21300000, guid: 226562b55fbddfd4cbefd1bb37d5d7ca, type: 3}
-    - {fileID: 21300000, guid: aa9a6f9d5b4badf4297f691e9ef0a6d2, type: 3}
+    - {fileID: 21300000, guid: 73d8184511990c245838e93931a1359e, type: 3}
+    - {fileID: 21300000, guid: 1e25cad83ba546b458e5cbaebb0d9485, type: 3}
+    - {fileID: 21300000, guid: 73d8184511990c245838e93931a1359e, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
