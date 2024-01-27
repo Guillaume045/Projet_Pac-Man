@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;   // event
 using UnityEngine.UI;       // score
+using UnityEngine.SceneManagement;
 
 public class Deplace : MonoBehaviour
 {
     public float seed = 10;
     public float score = 0;
     public Text Texte_Score;
-    public UnityEvent<GameObject> Player;
+
+    public int vie = 3;    // Nombre de vies
+    public Text Texte_Vie;
+    private Vector3 spawnPoint;
 
     private bool canEatGhosts = false;
     private float superPacGommeStartTime = 0f;
@@ -17,12 +21,21 @@ public class Deplace : MonoBehaviour
 
     void Start()
     {
-        
+        spawnPoint = transform.position;
+
+        if (Texte_Vie != null)
+        {
+            Texte_Vie.text = "Vie : " + vie.ToString();
+        }
+
+        if (Texte_Score != null)
+        {
+            Texte_Score.text = "Score : " + score.ToString();
+        }
     }
 
     void Update()
-    {
-        // mouvement joueur
+    {   // mouvement joueur
         float movX = Input.GetAxis("Horizontal");
         float movY = Input.GetAxis("Vertical");
         transform.Translate(new Vector2(movX, movY) * seed * Time.deltaTime);
@@ -30,37 +43,63 @@ public class Deplace : MonoBehaviour
         if (canEatGhosts && Time.time - superPacGommeStartTime >= superPacGommeDuration)
         {
             canEatGhosts = false;
-            Debug.Log("temps depasser");
+            Debug.Log("temps dépassé");
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        //Debug.Log("Collision avec : " + collision.gameObject.name);
-        if (collision.collider.CompareTag("Pac_Gomme"))
+        if (other.CompareTag("Pac_Gomme"))
         {
-            //Debug.Log("Score + 10");
+            Destroy(other.gameObject);
             score += 10;
-
             if (Texte_Score != null)
             {
                 Texte_Score.text = "Score : " + score.ToString();
             }
         }
-        if (collision.collider.CompareTag("Super_Pac_Gomme"))
+        else if (other.CompareTag("Super_Pac_Gomme"))
         {
-            //Debug.Log("Super_Pac_Gomme manger");
+            Destroy(other.gameObject);
             canEatGhosts = true;
             superPacGommeStartTime = Time.time;
         }
-        else if (collision.collider.CompareTag("Fantôme") && canEatGhosts)
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Super_Pac_Gomme"))
         {
-            //Debug.Log("Fantôme mangé");
+            canEatGhosts = false;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("Fantôme") && canEatGhosts)
+        {
             Destroy(collision.gameObject);
         }
         else if (collision.collider.CompareTag("Fantôme"))
         {
-            Destroy(gameObject);
+            LoseLife();
+        }
+    }
+
+    void LoseLife()
+    {
+        vie--;
+        if (Texte_Vie != null)
+        {
+            Texte_Vie.text = "Vie : " + vie.ToString();
+        }
+        if (vie <= 0)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            transform.position = spawnPoint;
         }
     }
 }
