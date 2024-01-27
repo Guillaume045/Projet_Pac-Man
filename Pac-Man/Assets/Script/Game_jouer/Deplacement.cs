@@ -20,6 +20,13 @@ public class Deplace : MonoBehaviour
 
     void Start()
     {
+        if (!PlayerPrefs.HasKey("GameLaunched"))
+        {
+            // Clear or initialize PlayerPrefs keys for the first launch
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.SetInt("GameLaunched", 1);
+        }
+        LoadStats();
         spawnPoint = transform.position;
         if (Texte_Vie != null)
         {
@@ -41,10 +48,10 @@ public class Deplace : MonoBehaviour
         if (canEatGhosts && Time.time - superPacGommeStartTime >= superPacGommeDuration)
         {
             canEatGhosts = false;
-            Debug.Log("temps dépassé");
+            Debug.Log("temps dï¿½passï¿½");
         }
 
-        if (PacManger >= 73)
+        if (PacManger == 74)
         {
             ResetScene();
         }
@@ -73,11 +80,11 @@ public class Deplace : MonoBehaviour
         {
             canEatGhosts = false;
         }
-        else if (other.CompareTag("Fantôme") && canEatGhosts)
+        else if (other.CompareTag("Fantï¿½me") && canEatGhosts)
         {
             //Destroy(collision.gameObject);
         }
-        else if (other.CompareTag("Fantôme"))
+        else if (other.CompareTag("Fantï¿½me"))
         {
             ViePerdu();
         }
@@ -90,6 +97,8 @@ public class Deplace : MonoBehaviour
 
         if (vie <= 0)
         {
+            PlayerPrefs.SetInt("Vie", vie);
+        PlayerPrefs.SetFloat("Score", score);
             SceneManager.LoadScene(0);
         }
         else
@@ -100,9 +109,42 @@ public class Deplace : MonoBehaviour
 
     void ResetScene()
     {
-        PlayerPrefs.SetInt("vie", vie);
-        PlayerPrefs.SetFloat("score", score);
+        PlayerPrefs.SetInt("Vie", vie);
+        PlayerPrefs.SetFloat("Score", score);
         PlayerPrefs.Save();
         SceneManager.LoadScene(1);
     }
+    void LoadStats()
+    {
+        if (PlayerPrefs.HasKey("Score"))
+        {
+            score = PlayerPrefs.GetFloat("Score");  
+        }
+        if (PlayerPrefs.HasKey("Vie"))
+        {
+            vie = PlayerPrefs.GetInt("Vie");  
+        }
+    }
+    void ClearPlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
+    }
+
+    // Utilisation de cette mÃ©thode pour libÃ©rer les Ã©vÃ©nements lors de la fermeture de l'application
+    void OnApplicationPause(bool isPaused)
+    {
+        if (isPaused)
+        {
+            // L'application est sur le point de se mettre en pause (fermeture).
+            ClearPlayerPrefs();
+        }
+    }
+
+    void OnApplicationQuit()
+    {
+        // L'application est sur le point de se fermer.
+        ClearPlayerPrefs();
+    }
 }
+    
