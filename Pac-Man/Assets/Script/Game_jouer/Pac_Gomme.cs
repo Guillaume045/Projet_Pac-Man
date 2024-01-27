@@ -4,15 +4,6 @@ using UnityEngine;
 
 public class Pac_Gomme : MonoBehaviour
 {
-
-    void Start()
-    {
-    }
-
-    void Update()
-    {
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("Collision détectée");

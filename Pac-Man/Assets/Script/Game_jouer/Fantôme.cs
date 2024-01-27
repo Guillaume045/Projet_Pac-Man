@@ -53,7 +53,6 @@ public class Fantôme : MonoBehaviour
 
     void Respawn()
     {
-        // Réinitialiser la position et la rotation du fantôme
         transform.position = spawnPoint;
         transform.rotation = Quaternion.identity;
         Invoke("ResetWaypoint", 0f);

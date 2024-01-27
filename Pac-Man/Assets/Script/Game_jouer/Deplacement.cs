@@ -8,6 +8,7 @@ public class Deplace : MonoBehaviour
 {
     public float seed = 10;
     public float score = 0;
+    public float PacManger = 0;
     public Text Texte_Score;
     public Text Texte_Vie;
 
@@ -43,7 +44,7 @@ public class Deplace : MonoBehaviour
             Debug.Log("temps dépassé");
         }
 
-        if (score >= 740)
+        if (PacManger >= 73)
         {
             ResetScene();
         }
@@ -55,6 +56,7 @@ public class Deplace : MonoBehaviour
         {
             Destroy(other.gameObject);
             score += 10;
+            PacManger += 1;
             Texte_Score.text = "Score : " + score.ToString();
         }
         else if (other.CompareTag("Super_Pac_Gomme"))
@@ -77,14 +79,15 @@ public class Deplace : MonoBehaviour
         }
         else if (other.CompareTag("Fantôme"))
         {
-            LoseLife();
+            ViePerdu();
         }
     }
 
-    void LoseLife()
+    void ViePerdu()
     {
-        vie--;
+        vie --;
         Texte_Vie.text = "Vie : " + vie.ToString();
+
         if (vie <= 0)
         {
             SceneManager.LoadScene(0);

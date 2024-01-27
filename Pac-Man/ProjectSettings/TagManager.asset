@@ -8,6 +8,7 @@ TagManager:
   - Super_Pac_Gomme
   - "Fant\xF4me"
   - Mur
+  - Evenement
   layers:
   - Default
   - TransparentFX
