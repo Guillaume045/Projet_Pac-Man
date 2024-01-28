@@ -4,24 +4,27 @@ using UnityEngine;
 
 public class Evenement : MonoBehaviour
 {
+    public float moveSpeed = 1000f;
+    public Vector2 targetPosition = new Vector2(0f, 1f);
+    public float teleportDelay = 50f;
 
     void Start()
     {
-        
+        StartCoroutine(TeleportAfterDelay());
     }
 
-    void Update()
+    IEnumerator TeleportAfterDelay()
     {
-        
+        yield return new WaitForSeconds(teleportDelay);
+        StartCoroutine(MoveToPosition(targetPosition));
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    IEnumerator MoveToPosition(Vector2 targetPos)
     {
-        //Debug.Log("Collision détectée");
-        if (collision.collider.CompareTag("Player"))
+        while (Vector2.Distance(transform.position, targetPos) > 0.01f)
         {
-            //Debug.Log("Objet détruit");
-            Destroy(gameObject);
+            transform.position = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+            yield return null;
         }
     }
 
