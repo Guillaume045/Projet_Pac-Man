@@ -12,6 +12,7 @@ public class Fantôme : MonoBehaviour
 
     void Start()
     {
+         
         spawnPoint = transform.position;
         Invoke("StartMovement", startDelay);
     }
@@ -22,6 +23,7 @@ public class Fantôme : MonoBehaviour
         {
             MoveToWaypoint();
         }
+        
     }
 
     void Update()
@@ -30,6 +32,7 @@ public class Fantôme : MonoBehaviour
         {
             MoveToWaypoint();
         }
+       
     }
 
     void MoveToWaypoint()

@@ -108,8 +108,7 @@ public class Deplace : MonoBehaviour
 
         if (vie <= 0)
         {
-            PlayerPrefs.SetInt("Vie", vie);
-            PlayerPrefs.SetFloat("Score", score);
+            PlayerPrefs.DeleteAll();
             SceneManager.LoadScene(0);
         }
         else
