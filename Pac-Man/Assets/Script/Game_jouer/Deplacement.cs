@@ -52,7 +52,7 @@ public class Deplace : MonoBehaviour
             Debug.Log("temps depasser");
         }
 
-        if (PacManger == 74)
+        if (PacManger == 73)
         {
             ResetScene();
         }
