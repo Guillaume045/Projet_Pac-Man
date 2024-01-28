@@ -19,7 +19,7 @@ Manœuvrez habilement à travers les dédales du labyrinthe, évitez les fantôm
 - Affrontez les fantômes
 - Trouvez les super pac-gommes pour rendre les fantômes vulnérables et les chasser pendant une période limitée.
 - Attrapez des fruits bonus qui apparaissent pour gagner des points supplémentaires.
-- Un menu d'accueille
+- Un menu d'accueil
 
 ---
 ## 3.C3
@@ -29,11 +29,12 @@ Caméra fixe
 Taille écran : ```1920 x 1080```
 
 ### ⌨ Controls
-Le joueur aura des contrôles pour se mouvoir:
-- Z: Avant
-- S: Arrière
-- Q: Gauche
-- D: Droite
+Le joueur peut se déplacer avec:
+- Z/↑: Avant
+- S/↓ : Arrière
+- Q/←: Gauche
+- D/→: Droite
+
 
 ### 🚀 Character
 Le joueur ne pourra que se deplacer pour survivre le plus lontemps possible et faire le plus gros score possible.
