@@ -25,4 +25,9 @@ public class Evenement : MonoBehaviour
         }
     }
 
+    public void Bonus(GameObject go)
+    {
+        Debug.Log("Collision");
+        Destroy(go);
+    }
 }

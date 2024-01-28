@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class Deplace : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class Deplace : MonoBehaviour
     private bool canEatGhosts = false;
     private float superPacGommeStartTime = 0f;
     private float superPacGommeDuration = 5f;
+
+    public UnityEvent<GameObject> Player;
 
     void Start()
     {
@@ -73,6 +76,12 @@ public class Deplace : MonoBehaviour
             Destroy(other.gameObject);
             canEatGhosts = true;
             superPacGommeStartTime = Time.time;
+        }
+        else if (other.CompareTag("Evenement"))
+        {
+            Destroy(other.gameObject);
+            score += 250;
+            Texte_Score.text = "Score : " + score.ToString();
         }
     }
 
