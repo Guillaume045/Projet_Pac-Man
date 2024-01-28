@@ -437,8 +437,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   seed: 7
   score: 0
-  PacManger: 0
   Texte_Score: {fileID: 1074212555}
+  PacManger: 0
   Texte_Vie: {fileID: 535135307}
   vie: 3
 --- !u!1 &983115274

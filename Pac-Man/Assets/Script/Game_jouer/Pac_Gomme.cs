@@ -13,5 +13,4 @@ public class Pac_Gomme : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }

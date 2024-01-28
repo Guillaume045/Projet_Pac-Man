@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2065285705302889470}
   m_Layer: 0
   m_Name: "fant\xF4me2"
-  m_TagString: "Fant\xF4me"
+  m_TagString: Fantome
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

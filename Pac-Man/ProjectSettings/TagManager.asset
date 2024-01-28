@@ -9,6 +9,7 @@ TagManager:
   - "Fant\xF4me"
   - Mur
   - Evenement
+  - Fantome
   layers:
   - Default
   - TransparentFX

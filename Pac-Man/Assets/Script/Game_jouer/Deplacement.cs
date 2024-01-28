@@ -7,12 +7,14 @@ using UnityEngine.SceneManagement;
 public class Deplace : MonoBehaviour
 {
     public float seed = 10;
-    public float score = 0;
-    public float PacManger = 0;
-    public Text Texte_Score;
-    public Text Texte_Vie;
 
+    public float score = 0;
+    public Text Texte_Score;
+    public float PacManger = 0;
+
+    public Text Texte_Vie;
     public int vie = 3;
+
     private Vector3 spawnPoint;
     private bool canEatGhosts = false;
     private float superPacGommeStartTime = 0f;
@@ -22,7 +24,6 @@ public class Deplace : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("GameLaunched"))
         {
-            // Clear or initialize PlayerPrefs keys for the first launch
             PlayerPrefs.DeleteAll();
             PlayerPrefs.SetInt("GameLaunched", 1);
         }
@@ -48,7 +49,7 @@ public class Deplace : MonoBehaviour
         if (canEatGhosts && Time.time - superPacGommeStartTime >= superPacGommeDuration)
         {
             canEatGhosts = false;
-            Debug.Log("temps d�pass�");
+            Debug.Log("temps depasser");
         }
 
         if (PacManger == 74)
@@ -64,6 +65,7 @@ public class Deplace : MonoBehaviour
             Destroy(other.gameObject);
             score += 10;
             PacManger += 1;
+            Debug.Log(PacManger);
             Texte_Score.text = "Score : " + score.ToString();
         }
         else if (other.CompareTag("Super_Pac_Gomme"))
@@ -80,11 +82,11 @@ public class Deplace : MonoBehaviour
         {
             canEatGhosts = false;
         }
-        else if (other.CompareTag("Fant�me") && canEatGhosts)
+        else if (other.CompareTag("Fantome") && canEatGhosts)
         {
             //Destroy(collision.gameObject);
         }
-        else if (other.CompareTag("Fant�me"))
+        else if (other.CompareTag("Fantome"))
         {
             ViePerdu();
         }
@@ -98,7 +100,7 @@ public class Deplace : MonoBehaviour
         if (vie <= 0)
         {
             PlayerPrefs.SetInt("Vie", vie);
-        PlayerPrefs.SetFloat("Score", score);
+            PlayerPrefs.SetFloat("Score", score);
             SceneManager.LoadScene(0);
         }
         else
@@ -131,19 +133,16 @@ public class Deplace : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    // Utilisation de cette méthode pour libérer les événements lors de la fermeture de l'application
     void OnApplicationPause(bool isPaused)
     {
         if (isPaused)
         {
-            // L'application est sur le point de se mettre en pause (fermeture).
             ClearPlayerPrefs();
         }
     }
 
     void OnApplicationQuit()
     {
-        // L'application est sur le point de se fermer.
         ClearPlayerPrefs();
     }
 }
